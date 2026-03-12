@@ -1,0 +1,67 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: ai-job-helper
+  
+  # MySQL数据库配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ai_job_helper?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false
+    username: root
+    password: root
+  
+  # Redis配置
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: 
+      database: 0
+  
+  # Elasticsearch配置
+  elasticsearch:
+    uris: http://localhost:9200
+  
+  # 文件上传配置
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+# MyBatis Plus配置
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+# OpenAI API配置（可选）
+openai:
+  api-key: ${OPENAI_API_KEY:sk-placeholder}
+  base-url: https://api.openai.com
+  timeout: 60
+
+# 简历解析配置
+resume:
+  parse:
+    temp-dir: ./temp/resumes
+    supported-types: pdf,doc,docx,jpg,jpeg,png
+
+# 职位爬取配置
+job:
+  crawl:
+    delay-ms: 1000
+    max-pages: 10
+
+# 日志配置
+logging:
+  level:
+    com.aijobhelper: debug
+    org.springframework: info
